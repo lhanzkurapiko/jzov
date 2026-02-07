@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jzov | Portfolio</title>
+  <meta name="description" content="Jzov – Creative Portfolio | Developer, Designer, Anime Enthusiast"/>
+
+  <!-- Google Fonts: Poppins (clean & modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #8b5cf6;       /* vibrant purple – anime vibe */
+      --primary-dark: #7c3aed;
+      --bg: #0a0a17;
+      --card: #111827;
+      --text: #e2e8f0;
+      --gray: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 1.2rem 0;
+      background: rgba(10,10,23,0.9);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+    }
+
+    header.scrolled {
+      padding: 0.8rem 0;
+      box-shadow: 0 6px 25px rgba(139,92,246,0.15);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #c084fc, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #0a0a17 0%, #1e1e2e 100%);
+    }
+
+    .hero-content h1 {
+      font-size: 4.8rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, #c084fc, #8b5cf6, #d946ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content h2 {
+      font-size: 2.1rem;
+      color: var(--gray);
+      margin-bottom: 1.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      box-shadow: 0 12px 35px rgba(139,92,246,0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 25px 50px rgba(139,92,246,0.5);
+      background: var(--primary-dark);
+    }
+
+    /* Sections */
+    section {
+      padding: 9rem 0 7rem;
+    }
+
+    h2.section-title {
+      font-size: 3.2rem;
+      text-align: center;
+      margin-bottom: 4.5rem;
+      background: linear-gradient(90deg, #c084fc, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 2.2rem;
+      transition: all 0.5s ease;
+      border: 1px solid rgba(139,92,246,0.12);
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-18px);
+      border-color: var(--primary);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .skill {
+      background: rgba(139,92,246,0.18);
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 500;
+      border: 1px solid var(--primary);
+      transition: all 0.4s;
+    }
+
+    .skill:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.12) rotate(2deg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 0 2rem;
+      background: #05050f;
+      border-top: 1px solid rgba(139,92,246,0.08);
+      color: var(--gray);
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 3.5rem; }
+      .nav-links { gap: 1.2rem; font-size: 0.95rem; }
+      section { padding: 6rem 0 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="container">
+      <nav>
+        <div class="logo">Jzov</div>
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" data-aos="fade-up" data-aos-duration="1200">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Jzov</h1>
+        <h2>Creative Mind • Web Enthusiast • Anime Lover</h2>
+        <p style="font-size:1.35rem; max-width:620px; margin:2rem 0; color:var(--gray);">
+          Building immersive digital experiences with clean code, bold designs, and a touch of anime magic. From Quezon City with passion.
+        </p>
+        <a href="#projects" class="btn">Explore My Work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">About Me</h2>
+      <div class="grid">
+        <div class="card" data-aos="fade-right" data-aos-delay="150">
+          <h3>Who I Am</h3>
+          <p>I'm Jzov – a young creator blending web development, design, and anime-inspired aesthetics. Passionate about making things that feel alive and intuitive.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
+          <h3>My Vibe</h3>
+          <p>Obsessed with smooth animations, dark themes, Next.js/Vercel stacks, and turning ideas into pixel-perfect realities. Anime fuels my creativity (JJK, Chainsaw Man, Solo Leveling vibes).</p>
+        </div>
+        <div class="card" data-aos="fade-left" data-aos-delay="450">
+          <h3>What's Next</h3>
+          <p>Always experimenting – anime fan sites, interactive portfolios, freelance gigs. Let's build something epic together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" style="background:#0c0c1f;">
+    <div class="container">
+      <h2 class="section-title" data-aos="zoom-in">Skills & Tools</h2>
+      <div class="skills">
+        <div class="skill" data-aos="flip-left" data-aos-delay="100">HTML5 + CSS3</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="150">Tailwind CSS</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="200">JavaScript / TypeScript</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="250">React • Next.js</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="300">Vercel Hosting</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="350">UI/UX Design</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="400">AOS / Framer Motion</div>
+        <div class="skill" data-aos="flip-left" data-aos-delay="450">Anime-Inspired Aesthetics</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Projects</h2>
+      <div class="grid">
+        <div class="card" data-aos="fade-up" data-aos-delay="150">
+          <h3>Anime Movies Hub</h3>
+          <p>Next.js powered anime movie catalog with AniList API, search, filters, dark mode, and smooth animations.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
+          <h3>Personal Portfolio (this one!)</h3>
+          <p>Animated single-page site with AOS effects, gradient text, hover interactions – built for speed & style.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="450">
+          <h3>More Coming Soon...</h3>
+          <p>Interactive anime trackers, fan tools, freelance client work – stay tuned!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#0c0c1f;">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title" data-aos="fade-up">Let's Connect</h2>
+      <p style="font-size:1.4rem; margin:2.5rem 0; max-width:680px; margin-left:auto; margin-right:auto; color:var(--gray);">
+        Got a project idea? Want to collab on something anime-related? Or just say hi?<br>
+        Drop me a message – I'm always open to cool ideas.
+      </p>
+      <a href="mailto:jzov@example.com" class="btn" style="font-size:1.25rem; padding:1.2rem 3.5rem;">
+        Email Me →
+      </a>
+      <p style="margin-top:3.5rem; color:var(--gray);">
+        Quezon City, Philippines • Open for remote collabs & freelance
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Jzov. Crafted with 💜 & Anime Energy</p>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1100,
+      once: true,
+      offset: 120
+    });
+
+    // Subtle header scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 80);
+    });
+  </script>
+</body>
+</html>
